@@ -1,8 +1,10 @@
 import { Routes, Route } from "react-router"
+import { Outlet } from "react-router"
 
 import Header from "./components/Header"
-import { Outlet } from "react-router"
 import HomeScreen from "./screens/HomeScreen"
+import LoginScreen from "./screens/LoginScreen"
+import RegisterScreen from "./screens/RegisterScreen"
 
 const Layout = () => {
     return (
@@ -21,6 +23,8 @@ function App() {
             <Routes>
                 <Route element={<Layout />}>
                     <Route index element={<HomeScreen />} />
+                    <Route path="/login" element={<LoginScreen />} />
+                    <Route path="/register" element={<RegisterScreen />} />
                 </Route>
             </Routes>
         </>

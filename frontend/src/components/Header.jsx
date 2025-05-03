@@ -1,22 +1,24 @@
 import { Navbar, Nav, Container } from "react-bootstrap"
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa"
-import { NavLink   } from "react-router"
+import { Link } from "react-router"
 
 function Header() {
     return (
         <header>
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
                 <Container>
-                    <NavLink  to="/">
-                        <Navbar.Brand>Redux Template</Navbar.Brand>
-                    </NavLink >
+                    {/* <Link to="/" style={{ textDecoration: "none" }}> */}
+                    <Navbar.Brand as={Link} to="/">
+                        Redux Template
+                    </Navbar.Brand>
+                    {/* </Link> */}
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link href="/login">
+                            <Nav.Link as={Link} to="/login">
                                 <FaSignInAlt /> Sign In
                             </Nav.Link>
-                            <Nav.Link href="/register">
+                            <Nav.Link as={Link} to="/register">
                                 <FaSignOutAlt /> Register
                             </Nav.Link>
                         </Nav>
