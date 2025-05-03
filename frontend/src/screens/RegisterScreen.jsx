@@ -1,6 +1,12 @@
-import { useState } from "react"
-import { Link } from "react-router"
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router"
 import { Form, Button, Row, Col } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { toast } from "react-toastify"
+import Loader from "../components/Loader"
+import { useRegisterMutation } from "../slices/usersApiSlice"
+import { setCredentials } from "../slices/authSlice"
+
 import FormContainer from "../components/FormContainer"
 
 function RegisterScreen() {
@@ -9,8 +15,32 @@ function RegisterScreen() {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const [register, { isLoading }] = useRegisterMutation()
+
+    const { userInfo } = useSelector((state) => state.auth)
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate("/")
+        }
+    }, [navigate, userInfo])
+
     const submitHandler = async (event) => {
         event.preventDefault()
+        if (password !== confirmPassword) {
+            toast.error("Passwords do not match!")
+        } else {
+            try {
+                const res = await register({ name, email, password }).unwrap
+                dispatch(setCredentials({ ...res }))
+                navigate("/")
+            } catch (err) {
+                toast.error(err.data?.message) || err.error
+            }
+        }
     }
 
     return (
@@ -64,7 +94,7 @@ function RegisterScreen() {
                         }}
                     ></Form.Control>
                 </Form.Group>
-
+                {isLoading && <Loader />}
                 <Button type="submit" variant="primary" className="mt-3">
                     Sign Up
                 </Button>
