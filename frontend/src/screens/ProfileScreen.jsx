@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router"
+import { Link } from "react-router"
 import { Form, Button, Row, Col } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
@@ -16,7 +17,6 @@ function ProfileScreen() {
     const [confirmPassword, setConfirmPassword] = useState("")
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const { userInfo } = useSelector((state) => state.auth)
 
