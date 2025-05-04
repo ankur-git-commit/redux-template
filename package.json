@@ -9,7 +9,7 @@
     "client": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "cd frontend && npm install && npm run build",
-    "render-build": "npm install && cd frontend && npm install && npm run build && cd .. && npm install"
+    "render-build": "npm install && cd frontend && npm install && npx vite build && cd .."
   },
   "repository": {
     "type": "git",
